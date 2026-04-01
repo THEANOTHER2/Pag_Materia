@@ -1,146 +1,326 @@
- :root {
-            --primary: #4f46e5;
-            --secondary: #0f172a;
-            --accent: #06b6d4;
-            --bg: #f1f5f9;
-            --text: #1e293b;
-            --white: #ffffff;
-            /* Configuración de legibilidad solicitada */
-            --line-height: 2.2; 
-            --letter-spacing: 0.05em; 
-        }
+:root {
+    /* Paleta Institucional Original UTolima */
+    --primary: #8b1d1d;       
+    --primary-light: #fef2f2; 
+    --primary-muted: #b91c1c; 
+    --secondary: #1e293b;    
+    --accent: #d4af37;       
+    --bg: #f8fafc;           
+    --white: #ffffff;
+    --text-main: #374151;    
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    
+    /* Configuración de Espaciado Mejorado */
+    --line-height: 1.8;      
+    --card-padding: 45px;    /* Más aire dentro de las cards */
+    --section-gap: 50px;     /* Espacio entre bloques grandes */
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            display: flex; 
-            min-height: 100vh;
-            line-height: var(--line-height);
-            letter-spacing: var(--letter-spacing);
-        }
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    -webkit-font-smoothing: antialiased;
+}
 
-        /* Navegación Lateral */
-        nav {
-            width: 320px;
-            background: var(--secondary);
-            color: white;
-            padding: 2.5rem 1.5rem;
-            position: fixed;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 100;
-            box-shadow: 10px 0 30px rgba(0,0,0,0.1);
-        }
+body { 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    background: var(--bg); 
+    color: var(--text-main); 
+    display: flex; 
+    min-height: 100vh;
+    line-height: var(--line-height);
+}
 
-        nav h1 { 
-            font-size: 1.2rem; 
-            margin-bottom: 2.5rem; 
-            text-align: center; 
-            color: var(--accent); 
-            font-weight: 800;
-            line-height: 1.4;
-            text-transform: uppercase;
-        }
+/* --- NAVEGACIÓN LATERAL --- */
+nav {
+    width: 320px;
+    background: var(--white);
+    padding: 2.5rem 1.5rem;
+    position: fixed;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    border-right: 2px solid var(--primary-light);
+    overflow-y: auto; 
+}
+/* --- SCROLLBAR DEL MENÚ (ESTÉTICA MATE / SOBRIA) --- */
 
-        .nav-btn {
-            padding: 16px 20px;
-            border-radius: 14px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: none;
-            background: transparent;
-            color: #94a3b8;
-            text-align: left;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-        }
+/* 1. Para Firefox (Tonos tierra desaturados) */
+nav {
+    scrollbar-width: thin;
+    /* Tirador: Bronce ceniza (#8e7631) | Fondo: Granate oscuro mate (#4a1010) */
+    scrollbar-color: #8e7631 #4a1010; 
+}
 
-        .nav-btn:hover, .nav-btn.active {
-            background: rgba(255,255,255,0.08);
-            color: white;
-            padding-left: 30px;
-        }
+/* 2. Para Chrome, Edge y Safari (Personalización detallada) */
 
-        .nav-btn.active { border-left: 6px solid var(--accent); }
+/* Estilizamos el ancho para que sea discreto */
+nav::-webkit-scrollbar {
+    width: 6px; 
+}
 
-        /* Contenido Principal */
-        main { 
-            margin-left: 320px; 
-            flex: 1; 
-            padding: 4rem; 
-            max-width: 1200px; 
-        }
+/* Fondo de la barra (Track) - Granate muy oscuro y opaco */
+nav::-webkit-scrollbar-track {
+    background: #4a1010; 
+    border-radius: 0px;
+}
 
-        .tab-content { display: none; animation: slideIn 0.5s ease-out; }
-        .tab-content.active { display: block; }
+/* El tirador (Handle) - Bronce "Viejo" (Dorado muy desaturado y oscuro) */
+nav::-webkit-scrollbar-thumb {
+    background-color: #8e7631; 
+    border-radius: 12px;
+    /* Pequeño espacio para que se vea más refinado */
+    border: 1.5px solid #4a1010; 
+}
 
-        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+/* Efecto al interactuar - Solo un poco más claro, manteniendo la opacidad */
+nav::-webkit-scrollbar-thumb:hover {
+    background-color: #a08945; 
+}
 
-        /* Tarjetas Estilizadas */
-        .glass-card {
-            background: var(--white);
-            border-radius: 28px;
-            padding: 45px;
-            margin-bottom: 40px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.02);
-        }
+/* --- AJUSTE OPCIONAL PARA EL FONDO DEL NAV --- */
+/* Si el rojo del nav principal también te parece chillón, 
+   puedes usar este tono que es más sobrio y combina con el scroll: */
+nav {
+    background: #ffffff; /* Mantener blanco para que resalte solo el scroll mate */
+    border-right: 1px solid #d1d5db;
+}
+nav h1 { 
+    font-size: 0.95rem; 
+    margin-bottom: 0.5rem; 
+    color: var(--primary); 
+    font-weight: 800;
+    line-height: 1.4;
+    text-transform: uppercase;
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 15px;
+}
 
-        h2 { 
-            color: var(--secondary); 
-            margin-bottom: 3rem; 
-            font-size: 2rem; 
-            font-weight: 800; 
-            border-left: 10px solid var(--primary); 
-            padding-left: 25px;
-            line-height: 1.2;
-        }
+.nav-group-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.12em;
+    margin: 2rem 0 0.8rem 0.5rem;
+    font-weight: 700;
+}
 
-        h3 { color: var(--primary); margin: 40px 0 25px 0; font-size: 1.6rem; font-weight: 700; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
+.nav-btn {
+    padding: 14px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    background: transparent;
+    color: var(--text-main);
+    text-align: left;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+    width: 100%;
+}
 
-        /* Espacios para Imágenes (Placeholders) */
-        .image-container {
-            width: 100%;
-            height: 400px;
-            background: #f8fafc;
-            border: 3px dashed #cbd5e1;
-            border-radius: 24px;
-            margin: 35px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #94a3b8;
-            transition: all 0.3s;
-        }
-        .image-container:hover { border-color: var(--primary); background: #f1f5ff; }
+.nav-btn:hover { 
+    background: var(--primary-light); 
+    color: var(--primary);
+    transform: translateX(5px);
+}
 
-        /* FAQ Estilo Moderno */
-        details { background: white; margin-bottom: 18px; border-radius: 18px; border: 1px solid #e2e8f0; transition: transform 0.2s; }
-        details:hover { transform: translateY(-2px); border-color: var(--primary); }
-        summary { padding: 25px; cursor: pointer; font-weight: 700; color: var(--secondary); display: flex; justify-content: space-between; align-items: center; list-style: none; outline: none; }
-        summary::after { content: '+'; font-size: 1.8rem; color: var(--primary); font-weight: 300; }
-        details[open] summary::after { content: '−'; }
-        .faq-ans { padding: 0 25px 30px 25px; border-top: 1px solid #f8fafc; font-size: 1rem; color: var(--text); }
+.nav-btn.active {
+    background: var(--primary);
+    color: var(--white);
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(139, 29, 29, 0.2);
+}
 
-        /* Tablas */
-        .table-wrapper { width: 100%; overflow-x: auto; margin: 35px 0; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.02); }
-        table { width: 100%; border-collapse: collapse; background: white; min-width: 700px; }
-        th { background: #f8fafc; padding: 22px; text-align: left; color: var(--primary); font-weight: 800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; }
-        td { padding: 22px; border-top: 1px solid #f1f5f9; font-size: 0.95rem; }
+/* --- ÁREA PRINCIPAL --- */
+main { 
+    margin-left: 320px; 
+    flex: 1; 
+    padding: 4rem 6%; 
+    max-width: 1400px; 
+}
 
-        b { color: var(--secondary); font-weight: 800; }
-        .tag { background: #eef2ff; color: var(--primary); padding: 6px 18px; border-radius: 30px; font-size: 0.75rem; font-weight: 800; margin-bottom: 15px; display: inline-block; }
+h2 { 
+    color: var(--primary); 
+    margin-bottom: 2.5rem; 
+    font-size: 2.2rem; 
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
 
-        @media (max-width: 1024px) {
-            nav { width: 100%; height: auto; position: relative; padding: 2rem; }
-            main { margin-left: 0; padding: 2rem; max-width: 100%; }
-            body { flex-direction: column; }
-            .image-container { height: 250px; }
-        }
+h3 { 
+    color: var(--secondary); 
+    margin: 0px 0 25px 0; /* Más espacio arriba de cada subtítulo */
+    font-size: 1.4rem; 
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* --- CARDS Y CONTENIDO --- */
+.card {
+    background: var(--white);
+    border-radius: 18px;
+    padding: var(--card-padding);
+    margin-bottom: var(--section-gap);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.info-block {
+    border-left: 6px solid var(--primary);
+    padding: 25px 30px;
+    margin: 35px 0;
+    background: #fffafa; /* Un rojo muy sutil de fondo */
+    border-radius: 4px 15px 15px 4px;
+}
+
+.bullet-list {
+    margin: 20px 0;
+    padding-left: 20px;
+}
+
+.bullet-list li {
+    margin-bottom: 12px;
+}
+
+/* --- TABLAS (Recuperando el Rojo Original) --- */
+.table-container { 
+    overflow-x: auto; 
+    margin: 35px 0; 
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+table { width: 100%; border-collapse: collapse; background: white; }
+
+th { 
+    background: var(--primary); /* Volvemos al rojo institucional */
+    color: white; 
+    padding: 18px; 
+    text-align: left; 
+    font-size: 0.85rem; 
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+td { 
+    padding: 18px; 
+    border-bottom: 1px solid var(--border); 
+    font-size: 0.95rem; 
+}
+
+/* --- FAQ --- */
+/* --- FAQ CON ICONOS DINÁMICOS (+ / -) --- */
+details { 
+    background: var(--white); 
+    margin-bottom: 20px; /* Espaciado entre preguntas */
+    border-radius: 12px; 
+    border: 1px solid var(--border); 
+    transition: all 0.3s ease;
+}
+
+details[open] {
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(139, 29, 29, 0.05);
+}
+
+summary { 
+    padding: 24px 30px; 
+    cursor: pointer; 
+    font-weight: 600; 
+    color: var(--primary); 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    list-style: none; /* Quita la flecha por defecto en algunos navegadores */
+}
+
+/* Ocultar la flecha nativa en Safari/Chrome */
+summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Configuración del Icono + */
+summary::after { 
+    content: '+'; 
+    font-size: 1.5rem; 
+    font-family: 'Courier New', Courier, monospace; /* Para asegurar que el símbolo sea claro */
+    transition: transform 0.3s ease;
+    color: var(--accent); /* Dorado para resaltar el botón */
+    font-weight: bold;
+}
+
+/* Configuración del Icono - al abrir */
+details[open] summary::after { 
+    content: '−'; /* Usamos un guion largo para que combine con el ancho del + */
+    transform: rotate(180deg);
+    color: var(--primary);
+}
+
+.faq-ans { 
+    padding: 0 30px 25px 30px; 
+    border-top: 1px solid var(--primary-light); 
+    color: var(--text-muted); 
+    font-size: 0.95rem;
+    line-height: var(--line-height);
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(-10px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+/* --- MULTIMEDIA --- */
+.placeholder-img {
+    width: 100%;
+    height: 250px;
+    background: #fcfcfc;
+    border: 2px dashed var(--border);
+    border-radius: 20px;
+    margin: 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+}
+
+.video-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+    gap: 25px; 
+    margin-top: 30px;
+}
+
+.video-btn { 
+    text-decoration: none; 
+    padding: 25px; 
+    background: white; 
+    border: 1px solid var(--border); 
+    border-radius: 15px; 
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
+    transition: 0.3s;
+}
+
+.video-btn:hover { 
+    border-color: var(--primary); 
+    background: var(--primary-light);
+    transform: translateY(-3px);
+}
+
+@media (max-width: 1024px) {
+    nav { width: 100%; height: auto; position: relative; padding: 1.5rem; }
+    main { margin-left: 0; padding: 2rem 1.2rem; }
+    body { flex-direction: column; }
+}
